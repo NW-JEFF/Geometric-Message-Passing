@@ -167,7 +167,7 @@ best_val_acc, test_acc, train_time, mean, std = run_experiment_reg(
     val_loader, 
     test_loader,
     n_epochs=args.n_epochs,
-    n_times=5,
+    n_times=1,
     device=device,
     verbose=True,
     cosine=args.cosine,

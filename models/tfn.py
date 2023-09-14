@@ -8,6 +8,36 @@ import e3nn
 from models.mace_modules.blocks import RadialEmbeddingBlock
 from models.layers.tfn_layer import TensorProductConvLayer
 
+from torch import Tensor
+
+def first_node_pooling(x: Tensor, batch: Optional[Tensor],
+                     size: Optional[int] = None) -> Tensor:
+    r"""Returns batch-wise graph-level-outputs by averaging node features
+    across the node dimension, so that for a single graph
+    :math:`\mathcal{G}_i` its output is computed by
+
+    .. math::
+        \mathbf{r}_i = \frac{1}{N_i} \sum_{n=1}^{N_i} \mathbf{x}_n.
+
+    Functional method of the
+    :class:`~torch_geometric.nn.aggr.MeanAggregation` module.
+
+    Args:
+        x (torch.Tensor): Node feature matrix
+            :math:`\mathbf{X} \in \mathbb{R}^{(N_1 + \ldots + N_B) \times F}`.
+        batch (torch.Tensor, optional): The batch vector
+            :math:`\mathbf{b} \in {\{ 0, \ldots, B-1\}}^N`, which assigns
+            each node to a specific example.
+        size (int, optional): The number of examples :math:`B`.
+            Automatically calculated if not given. (default: :obj:`None`)
+    """
+    # import ipdb; ipdb.set_trace()
+    dim = -1 if x.dim() == 1 else -2
+    assert(batch is not None)
+    size = int(batch.max().item() + 1) if size is None else size
+    batch_right_1 = torch.cat([batch[-1:], batch[0:-1]])
+    batch_right_1[0] = -1
+    return x[(batch - batch_right_1) == 1]
 
 class TFNModel(torch.nn.Module):
     """
@@ -26,7 +56,7 @@ class TFNModel(torch.nn.Module):
         in_dim: int = 1,
         out_dim: int = 1,
         aggr: str = "sum",
-        pool: str = "sum",
+        pool: str = "first",
         gate: bool = True,
         batch_norm: bool = False,
         residual: bool = True,
@@ -120,7 +150,7 @@ class TFNModel(torch.nn.Module):
             self.convs.append(conv)
 
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, "first": first_node_pooling}[pool]
 
         if self.equivariant_pred:
             # Linear predictor for equivariant tasks using geometric features
