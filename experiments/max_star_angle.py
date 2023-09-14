@@ -1,9 +1,8 @@
 
 import sys
 sys.path.append('../')
-import pandas as pd
 import os
-
+import json
 import random
 import math
 import torch
@@ -39,9 +38,11 @@ parser.add_argument("--max_ell", type=int, required=False, default=3, help="max 
 parser.add_argument("--n_epochs", type=int, required=False, default=600, help="epochs to train")
 parser.add_argument("--n_layers", type=int, required=False, default=2, help="number of layers to train")
 parser.add_argument("--n_data", type=int, required=False, default=1000, help="number of datapoints")
+parser.add_argument("--lr", type=float, required=False, default=1e-4, help="learning rate")
 # parser.add_argument("--n_spoke", type=int, required=False, default=5, help="number of spokes in data")
 parser.add_argument("--fold", type=int, nargs='+', help="List of integer values which is the number of spoke could be sampled in the dataset")
 parser.add_argument("--cosine", action="store_true", help="Enable cosine lr decay.")
+parser.add_argument("--equivariant", action="store_true", help="equivariant prediction or not.")
     
 args = parser.parse_args()
 
@@ -93,7 +94,7 @@ def create_star_graphs(num=5, fold=[3,], dim=2, target="max", seed = 0):
         avg_vec = sum(pos)
         alpha = random.uniform(-1, 2)
         pos1 = [p + alpha * avg_vec for p in pos[1:]]
-        pos = pos[:1] + pos1
+        pos = pos[:1] + [v / torch.norm(v, p=2) for v in pos1] 
         
 
         # compute all possible angles
@@ -148,18 +149,20 @@ model_dict = {
     "schnet": SchNetModel,
     "dimenet": DimeNetPPModel,
     "spherenet": SphereNetModel,
-    "egnn": partial(EGNNModel, equivariant_pred=True),
-    "gvp": partial(GVPGNNModel, equivariant_pred=True),
-    "tfn": partial(TFNModel, max_ell=max_ell, equivariant_pred=True),
-    "mace": partial(MACEModel, max_ell=max_ell, correlation=correlation, equivariant_pred=True),
+    "egnn": partial(EGNNModel, equivariant_pred=args.equivariant),
+    "gvp": partial(GVPGNNModel, equivariant_pred=args.equivariant),
+    "tfn": partial(TFNModel, max_ell=max_ell, equivariant_pred=args.equivariant),
+    "mace": partial(MACEModel, max_ell=max_ell, correlation=correlation, equivariant_pred=args.equivariant),
 }
 
 assert(args.model in model_dict.keys())
-model = model_dict[model_name](num_layers=args.n_layers, in_dim=1, out_dim=1)
+model_func = model_dict[model_name]
+model_args = {'num_layers' : args.n_layers, 'in_dim' : 1, 'out_dim' : 1}
 
 # regression task
-best_val_acc, test_acc, train_time, result_string = run_experiment_reg(
-    model, 
+best_val_acc, test_acc, train_time, mean, std = run_experiment_reg(
+    model_func,
+    model_args, 
     train_loader,
     val_loader, 
     test_loader,
@@ -167,7 +170,8 @@ best_val_acc, test_acc, train_time, result_string = run_experiment_reg(
     n_times=5,
     device=device,
     verbose=True,
-    cosine=args.cosine
+    cosine=args.cosine,
+    lr=args.lr
 )
 
 
@@ -175,20 +179,25 @@ best_val_acc, test_acc, train_time, result_string = run_experiment_reg(
 
 
 args_dict = vars(args)
-args['best_val_acc'] = best_val_acc
-args['test_acc'] = test_acc
-args['train_time'] = train_time
-args['result_string'] = result_string
+args_dict['best_val_acc'] = best_val_acc
+args_dict['test_acc'] = test_acc
+args_dict['train_time'] = train_time
+args_dict['mean'] = mean
+args_dict['std'] = std
 
-# Read existing CSV file or create a new DataFrame if the file doesn't exist
-csv_file_path = 'exp_history.csv'
-if os.path.isfile(csv_file_path):
-    df = pd.read_csv(csv_file_path)
+# File path to save the results
+results_file_path = 'exp_history.json'
+
+# Read existing JSON file or create a new list if the file doesn't exist
+if os.path.isfile(results_file_path):
+    with open(results_file_path, 'r') as file:
+        results_list = json.load(file)
 else:
-    df = pd.DataFrame()
+    results_list = []
 
-# Append new column with current args
-df[len(df.columns)] = pd.Series(args_dict)
+# Append new args_dict to the results list
+results_list.append(args_dict)
 
-# Save DataFrame back to CSV
-df.to_csv(csv_file_path, index=False)
+# Save the results list back to the JSON file
+with open(results_file_path, 'w') as file:
+    json.dump(results_list, file, indent=4)

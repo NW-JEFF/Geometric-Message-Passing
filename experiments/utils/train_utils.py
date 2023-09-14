@@ -162,13 +162,13 @@ def eval_reg(model, loader, device):
     # print('fuck', len(loader.dataset))
     return loss_all / len(loader.dataset)
 
-def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu', cosine=False):
+def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu', cosine=False, lr=1e-4):
     total_param = 0
     for param in model.parameters():
         total_param += np.prod(list(param.data.size()))
     model = model.to(device)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     #     optimizer, mode='max', factor=0.9, patience=25, min_lr=0.0001)
     
@@ -215,17 +215,18 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
     return best_val_mae, test_mae, train_time, perf_per_epoch
 
 
-def run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, n_times=100, verbose=False, device='cpu', cosine=False):
-    print(f"Running experiment for {type(model).__name__} ({device}).")
+def run_experiment_reg(model_func, model_args, train_loader, val_loader, test_loader, n_epochs=100, n_times=100, verbose=False, device='cpu', cosine=False, lr=1e-4):
     
     best_val_mae_list = []
     test_mae_list = []
     train_time_list = []
     for idx in tqdm(range(n_times)):
+        model = model_func(**model_args)
+        print(f"Running experiment for {type(model).__name__} ({device}).")
         seed(idx) # set random seed
-        best_val_mae, test_mae, train_time, _ = _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs, verbose, device, cosine)
-        best_val_mae_list.append(best_val_mae)
-        test_mae_list.append(test_mae)
+        best_val_mae, test_mae, train_time, _ = _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs, verbose, device, cosine, lr)
+        best_val_mae_list.append(best_val_mae.cpu().item())
+        test_mae_list.append(test_mae.cpu().item())
         train_time_list.append(train_time)
     
     print(f'\nDone! Averaged over {n_times} runs: \n '
@@ -233,4 +234,4 @@ def run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=10
           f'- Best validation MAE: {np.mean(best_val_mae_list):.3f} ± {np.std(best_val_mae_list):.3f}. \n'
           f'- Test MAE: {np.mean(test_mae_list):.3f} ± {np.std(test_mae_list):.3f}. \n')
     
-    return best_val_mae_list, test_mae_list, train_time_list, f'- Test MAE: {np.mean(test_mae_list):.3f} ± {np.std(test_mae_list):.3f}. \n'
+    return best_val_mae_list, test_mae_list, train_time_list, np.mean(test_mae_list), np.std(test_mae_list)
