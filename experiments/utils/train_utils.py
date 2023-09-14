@@ -24,7 +24,13 @@ def train(model, train_loader, optimizer, device):
         batch = batch.to(device)
         optimizer.zero_grad()
         y_pred = model(batch)
+        print('--------------------- y_pred --------------------')
+        print(y_pred)
         loss = F.cross_entropy(y_pred, batch.y)
+        print('^^^^^^^^^^^^^^^^^^^^^ y_pred ^^^^^^^^^^^^^^^^^^^^')
+        print('--------------------- y_labe --------------------')
+        print(batch.y)
+        print('^^^^^^^^^^^^^^^^^^^^^ y_labe ^^^^^^^^^^^^^^^^^^^^')
         loss.backward()
         loss_all += loss.item() * batch.num_graphs
         optimizer.step()
@@ -128,22 +134,38 @@ def train_reg(model, train_loader, optimizer, device):
         batch = batch.to(device)
         optimizer.zero_grad()
         y_pred = model(batch).view(-1)
-        loss = F.l1_loss(y_pred, batch.y)
+        loss = F.l1_loss(y_pred, batch.y, reduction='sum')
+        
+        # print('train: --------------------- y_pred --------------------')
+        # print(y_pred)
+        # print('^^^^^^^^^^^^^^^^^^^^^ y_pred ^^^^^^^^^^^^^^^^^^^^')
+        # print('train: --------------------- y_labe --------------------')
+        # print(batch.y)
+        # print('^^^^^^^^^^^^^^^^^^^^^ y_labe ^^^^^^^^^^^^^^^^^^^^')
+
         loss.backward()
         loss_all += loss.item() * batch.num_graphs
         optimizer.step()
+    
     return loss_all / len(train_loader.dataset)
 
 def eval_reg(model, loader, device):
     model.eval()
     loss_all = 0
-    for batch in loader:
+    for idx, batch in enumerate(loader):
         batch = batch.to(device)
         with torch.no_grad():
             y_pred = model(batch).detach().cpu().view(-1)
             y_true = batch.y.detach().cpu()
-            loss_all += F.l1_loss(y_pred, y_true)
-
+            loss_all += F.l1_loss(y_pred, y_true, reduction='sum')
+            # print(idx)
+            # print('eval: --------------------- y_pred --------------------')
+            # print(y_pred)
+            # print('^^^^^^^^^^^^^^^^^^^^^ y_pred ^^^^^^^^^^^^^^^^^^^^')
+            # print('eval: --------------------- y_labe --------------------')
+            # print(y_true)
+            # print('^^^^^^^^^^^^^^^^^^^^^ y_labe ^^^^^^^^^^^^^^^^^^^^')
+    # print('fuck', len(loader.dataset))
     return loss_all / len(loader.dataset)
 
 def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu'):
@@ -153,8 +175,11 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
     model = model.to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, mode='max', factor=0.9, patience=25, min_lr=0.00001)
+    # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+    #     optimizer, mode='max', factor=0.9, patience=25, min_lr=0.0001)
+    
+    T_max = n_epochs
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max, eta_min=1e-6)
     
     if verbose:
         print(f"Running experiment for {type(model).__name__}.")
