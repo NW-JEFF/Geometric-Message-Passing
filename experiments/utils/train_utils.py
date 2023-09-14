@@ -24,13 +24,7 @@ def train(model, train_loader, optimizer, device):
         batch = batch.to(device)
         optimizer.zero_grad()
         y_pred = model(batch)
-        print('--------------------- y_pred --------------------')
-        print(y_pred)
         loss = F.cross_entropy(y_pred, batch.y)
-        print('^^^^^^^^^^^^^^^^^^^^^ y_pred ^^^^^^^^^^^^^^^^^^^^')
-        print('--------------------- y_labe --------------------')
-        print(batch.y)
-        print('^^^^^^^^^^^^^^^^^^^^^ y_labe ^^^^^^^^^^^^^^^^^^^^')
         loss.backward()
         loss_all += loss.item() * batch.num_graphs
         optimizer.step()
@@ -168,7 +162,7 @@ def eval_reg(model, loader, device):
     # print('fuck', len(loader.dataset))
     return loss_all / len(loader.dataset)
 
-def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu'):
+def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu', cosine=False):
     total_param = 0
     for param in model.parameters():
         total_param += np.prod(list(param.data.size()))
@@ -208,7 +202,9 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
                   f'Val MAE: {val_mae:.3f}, Test MAE: {test_mae:.3f}')
         
         perf_per_epoch.append((test_mae, val_mae, epoch, type(model).__name__))
-        scheduler.step(val_mae)
+        # scheduler.step(val_mae)
+        if cosine:
+            scheduler.step()
         lr = optimizer.param_groups[0]['lr']
     
     t = time.time() - t
@@ -219,7 +215,7 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
     return best_val_mae, test_mae, train_time, perf_per_epoch
 
 
-def run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, n_times=100, verbose=False, device='cpu'):
+def run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, n_times=100, verbose=False, device='cpu', cosine=False):
     print(f"Running experiment for {type(model).__name__} ({device}).")
     
     best_val_mae_list = []
@@ -227,7 +223,7 @@ def run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=10
     train_time_list = []
     for idx in tqdm(range(n_times)):
         seed(idx) # set random seed
-        best_val_mae, test_mae, train_time, _ = _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs, verbose, device)
+        best_val_mae, test_mae, train_time, _ = _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs, verbose, device, cosine)
         best_val_mae_list.append(best_val_mae)
         test_mae_list.append(test_mae)
         train_time_list.append(train_time)
@@ -237,4 +233,4 @@ def run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=10
           f'- Best validation MAE: {np.mean(best_val_mae_list):.3f} ± {np.std(best_val_mae_list):.3f}. \n'
           f'- Test MAE: {np.mean(test_mae_list):.3f} ± {np.std(test_mae_list):.3f}. \n')
     
-    return best_val_mae_list, test_mae_list, train_time_list
+    return best_val_mae_list, test_mae_list, train_time_list, f'- Test MAE: {np.mean(test_mae_list):.3f} ± {np.std(test_mae_list):.3f}. \n'
