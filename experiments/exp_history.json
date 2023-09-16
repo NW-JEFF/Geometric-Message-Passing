@@ -1992,5 +1992,155 @@
         ],
         "mean": 0.1887723058462143,
         "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 600,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            7
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.7697356939315796
+        ],
+        "test_acc": [
+            0.6952527761459351
+        ],
+        "train_time": [
+            88.89471578598022
+        ],
+        "mean": 0.6952527761459351,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 600,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            7
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.36098575592041016
+        ],
+        "test_acc": [
+            0.32390302419662476
+        ],
+        "train_time": [
+            89.67250847816467
+        ],
+        "mean": 0.32390302419662476,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 600,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            7
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.3456316590309143
+        ],
+        "test_acc": [
+            0.30082109570503235
+        ],
+        "train_time": [
+            89.11077308654785
+        ],
+        "mean": 0.30082109570503235,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 600,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            7
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.3524616062641144
+        ],
+        "test_acc": [
+            0.3091023862361908
+        ],
+        "train_time": [
+            89.31336855888367
+        ],
+        "mean": 0.3091023862361908,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 600,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            7
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.36064499616622925
+        ],
+        "test_acc": [
+            0.3242541551589966
+        ],
+        "train_time": [
+            91.06243062019348
+        ],
+        "mean": 0.3242541551589966,
+        "std": 0.0
     }
 ]

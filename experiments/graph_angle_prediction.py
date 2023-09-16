@@ -128,7 +128,7 @@ test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 # Regression task
 loss_mask = False
-if args.model == "paired_star2" and args.loss_mask:
+if args.dataset == "paired_star2" and args.loss_mask:
     loss_mask = True
 
 best_val_acc, test_acc, train_time, mean, std = run_experiment_reg(

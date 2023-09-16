@@ -110,7 +110,7 @@ def create_paired_star_graphs(num=5, fold=[5,], dim=3, n_pairs=2, seed=0):
         for i in range(n_pairs):
             pair_labels += [i+1,] * 2
         # the center (1st node) has lable 0, each pair has a unique number, and the rest has another
-        atoms = torch.LongTensor( [0,] + pair_labels + [n_pairs+1,] * (n_spoke - 2*n_pairs) )
+        atoms = torch.LongTensor( [0,] + pair_labels + [n_pairs+1,] * (n_spoke - 2*n_pairs))
 
         # edges read vertically; star graph: 0 -> 1, 0 -> 2 ...
         edge_index = torch.LongTensor( [ [0,] * n_spoke, list(range(1, n_spoke + 1)) ] )
@@ -190,26 +190,27 @@ def create_paired_star_graphs_with_two_centers(num=5, fold=[5,], dim=3, n_pairs=
         for i in range(n_pairs):
             pair_labels += [i+1,] * 2
         # the two centers have label 0, one at the front and the other at the back; each pair has a unique number, and the rest has another
-        atoms = torch.LongTensor( [0,] + pair_labels + [n_pairs+1,] * (n_spoke - 2*n_pairs) + [0,])
+        atoms = torch.LongTensor( [0,] + pair_labels + [n_pairs+1,] * (n_spoke - 2*n_pairs) + [0,]) # (n_spoke + 2)
 
         # two centers connect to every other node
-        edges1 = [0,] * (n_spoke + 1) + [n_spoke + 1,] * n_spoke
-        edges2 = list(range(1, n_spoke + 2)) + list(range(1, n_spoke + 1))
+        edges1 = [0,] * n_spoke + [n_spoke + 1,] * n_spoke
+        edges2 = list(range(1, n_spoke + 1)) * 2
         edge_index = torch.LongTensor( [ edges1, edges2 ] )
 
         # first spoke and the first center
         x = torch.Tensor([1, 0, 0])
         pos = [torch.Tensor([0, 0, 0]), x]  
 
+        # generate the rest of the nodes, including the second center
         if dim == 2:
-            for count in range(n_spoke):
+            for _ in range(n_spoke):
                 # random angle between 0 and 2*pi
                 random_angle = random.uniform(0, 2 * math.pi)
                 new_point = torch.Tensor([math.cos(random_angle), math.sin(random_angle), 0])
                 pos.append(new_point)
 
         elif dim == 3:
-            for count in range(n_spoke):
+            for _ in range(n_spoke):
                 theta = random.uniform(0, 2 * math.pi)  # Random angle around z-axis
                 phi = random.uniform(0, math.pi)  # Random angle from z-axis (polar angle)
                 new_point = torch.Tensor([
@@ -241,9 +242,9 @@ def create_paired_star_graphs_with_two_centers(num=5, fold=[5,], dim=3, n_pairs=
             angle = torch.acos(torch.dot(v1, v2) / (torch.norm(v1) * torch.norm(v2)))
             target_angles2.append(angle)
 
-        y = torch.Tensor(target_angles1 + target_angles2)
+        y = torch.Tensor(target_angles1 + target_angles2)  # (n_pair * 2)
         
-        pos = torch.stack(pos)
+        pos = torch.stack(pos)  # (n_spoke + 2, 3)
         data = Data(atoms=atoms, edge_index=edge_index, pos=pos, y=y)
         data.edge_index = to_undirected(data.edge_index)
         dataset.append(data)
