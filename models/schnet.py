@@ -4,6 +4,7 @@ import torch
 from torch.nn import functional as F
 from torch_geometric.nn import SchNet
 from torch_geometric.nn import global_add_pool, global_mean_pool
+from models.utils import first_node_pooling, first_and_last_node_pooling
 
 
 class SchNetModel(SchNet):
@@ -46,7 +47,8 @@ class SchNetModel(SchNet):
             cutoff, 
             interaction_graph=None,
             max_num_neighbors=max_num_neighbors, 
-            readout=pool, 
+            # the original readout function is used in `forward`, which is overwritten
+            readout="mean", 
             dipole=False, 
             mean=None, 
             std=None, 
@@ -54,7 +56,9 @@ class SchNetModel(SchNet):
         )
 
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, \
+                    "first": first_node_pooling, "first_and_last": first_and_last_node_pooling, \
+                    "none": lambda x,y: x}[pool]
         
         # Overwrite atom embedding and final predictor
         self.lin2 = torch.nn.Linear(hidden_channels // 2, out_dim)
@@ -71,10 +75,10 @@ class SchNetModel(SchNet):
             # # Message passing layer: (n, d) -> (n, d)
             h = h + interaction(h, batch.edge_index, edge_weight, edge_attr)
 
-        out = self.pool(h, batch.batch)  # (n, d) -> (batch_size, d)
+        out = self.pool(h, batch.batch)  # (n, d) -> (batch_size, d); if pool==first_and_last then (2*batch_size, d); if pool=none then (n, d)
         
         out = self.lin1(out)
         out = self.act(out)
-        out = self.lin2(out)  # (batch_size, out_dim)
+        out = self.lin2(out)  # (batch_size, out_dim); if pool==first_and_last then (2*batch_size, out_dim); if pool=none then (n, d)
 
         return out

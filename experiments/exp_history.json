@@ -2142,5 +2142,2753 @@
         ],
         "mean": 0.3242541551589966,
         "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07888606935739517
+        ],
+        "test_acc": [
+            0.07574934512376785
+        ],
+        "train_time": [
+            147.72150492668152
+        ],
+        "mean": 0.07574934512376785,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.06207301467657089
+        ],
+        "test_acc": [
+            0.06136968731880188
+        ],
+        "train_time": [
+            329.1626718044281
+        ],
+        "mean": 0.06136968731880188,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 300,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.06856612116098404
+        ],
+        "test_acc": [
+            0.06302317976951599
+        ],
+        "train_time": [
+            865.9986820220947
+        ],
+        "mean": 0.06302317976951599,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 300,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07822339236736298
+        ],
+        "test_acc": [
+            0.07166562974452972
+        ],
+        "train_time": [
+            1171.442851305008
+        ],
+        "mean": 0.07166562974452972,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07814498245716095
+        ],
+        "test_acc": [
+            0.0791638046503067
+        ],
+        "train_time": [
+            147.19491004943848
+        ],
+        "mean": 0.0791638046503067,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.06039922684431076
+        ],
+        "test_acc": [
+            0.06020490825176239
+        ],
+        "train_time": [
+            319.0157518386841
+        ],
+        "mean": 0.06020490825176239,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.8461005687713623
+        ],
+        "test_acc": [
+            0.8575514554977417
+        ],
+        "train_time": [
+            89.59662747383118
+        ],
+        "mean": 0.8575514554977417,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 400,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.06710934638977051
+        ],
+        "test_acc": [
+            0.06697211414575577
+        ],
+        "train_time": [
+            1143.875473499298
+        ],
+        "mean": 0.06697211414575577,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 400,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07180286943912506
+        ],
+        "test_acc": [
+            0.06809471547603607
+        ],
+        "train_time": [
+            1564.8718965053558
+        ],
+        "mean": 0.06809471547603607,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.033528294414281845
+        ],
+        "test_acc": [
+            0.028239071369171143
+        ],
+        "train_time": [
+            148.9368176460266
+        ],
+        "mean": 0.028239071369171143,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.019219843670725822
+        ],
+        "test_acc": [
+            0.01853354088962078
+        ],
+        "train_time": [
+            318.1117944717407
+        ],
+        "mean": 0.01853354088962078,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            1.0390942096710205
+        ],
+        "test_acc": [
+            1.1038755178451538
+        ],
+        "train_time": [
+            86.57049298286438
+        ],
+        "mean": 1.1038755178451538,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 400,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07658524811267853
+        ],
+        "test_acc": [
+            0.07457802444696426
+        ],
+        "train_time": [
+            1145.5841386318207
+        ],
+        "mean": 0.07457802444696426,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 400,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.043721675872802734
+        ],
+        "test_acc": [
+            0.04068931192159653
+        ],
+        "train_time": [
+            1556.4461131095886
+        ],
+        "mean": 0.04068931192159653,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.06779710203409195
+        ],
+        "test_acc": [
+            0.06653991341590881
+        ],
+        "train_time": [
+            2846.349136352539
+        ],
+        "mean": 0.06653991341590881,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07596124708652496
+        ],
+        "test_acc": [
+            0.07720860838890076
+        ],
+        "train_time": [
+            2845.451929092407
+        ],
+        "mean": 0.07720860838890076,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.05584646761417389
+        ],
+        "test_acc": [
+            0.056209832429885864
+        ],
+        "train_time": [
+            3858.057009458542
+        ],
+        "mean": 0.056209832429885864,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.025525439530611038
+        ],
+        "test_acc": [
+            0.02459174394607544
+        ],
+        "train_time": [
+            3847.1767933368683
+        ],
+        "mean": 0.02459174394607544,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.194085031747818
+        ],
+        "test_acc": [
+            0.20117543637752533
+        ],
+        "train_time": [
+            5506.695145845413
+        ],
+        "mean": 0.20117543637752533,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.10106662660837173
+        ],
+        "test_acc": [
+            0.11411861330270767
+        ],
+        "train_time": [
+            5496.499731063843
+        ],
+        "mean": 0.11411861330270767,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.026183390989899635
+        ],
+        "test_acc": [
+            0.029086466878652573
+        ],
+        "train_time": [
+            5874.1560661792755
+        ],
+        "mean": 0.029086466878652573,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.05101007968187332
+        ],
+        "test_acc": [
+            0.053930558264255524
+        ],
+        "train_time": [
+            5904.451920509338
+        ],
+        "mean": 0.053930558264255524,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.7501887083053589
+        ],
+        "test_acc": [
+            0.79610276222229
+        ],
+        "train_time": [
+            155.45198583602905
+        ],
+        "mean": 0.79610276222229,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.01568763330578804
+        ],
+        "test_acc": [
+            0.015512987039983273
+        ],
+        "train_time": [
+            166.12102961540222
+        ],
+        "mean": 0.015512987039983273,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.07145341485738754
+        ],
+        "test_acc": [
+            0.07704973220825195
+        ],
+        "train_time": [
+            336.48628282546997
+        ],
+        "mean": 0.07704973220825195,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.027496127411723137
+        ],
+        "test_acc": [
+            0.029809989035129547
+        ],
+        "train_time": [
+            330.2825095653534
+        ],
+        "mean": 0.029809989035129547,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            1.092411994934082
+        ],
+        "test_acc": [
+            1.155539870262146
+        ],
+        "train_time": [
+            93.03028464317322
+        ],
+        "mean": 1.155539870262146,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.5635851621627808
+        ],
+        "test_acc": [
+            0.6040733456611633
+        ],
+        "train_time": [
+            90.5324547290802
+        ],
+        "mean": 0.6040733456611633,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            1.039811372756958
+        ],
+        "test_acc": [
+            1.1038109064102173
+        ],
+        "train_time": [
+            90.91510248184204
+        ],
+        "mean": 1.1038109064102173,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.8479303121566772
+        ],
+        "test_acc": [
+            0.8586106896400452
+        ],
+        "train_time": [
+            88.79991459846497
+        ],
+        "mean": 0.8586106896400452,
+        "std": 0.0
+    },
+    {
+        "model": "schnet",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_out": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.5540358424186707
+        ],
+        "test_acc": [
+            0.5885545015335083
+        ],
+        "train_time": [
+            90.25694561004639
+        ],
+        "mean": 0.5885545015335083,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_out": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.015066752210259438
+        ],
+        "test_acc": [
+            0.014798509888350964
+        ],
+        "train_time": [
+            159.19660568237305
+        ],
+        "mean": 0.014798509888350964,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_out": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.031297892332077026
+        ],
+        "test_acc": [
+            0.036677997559309006
+        ],
+        "train_time": [
+            336.2500545978546
+        ],
+        "mean": 0.036677997559309006,
+        "std": 0.0
+    },
+    {
+        "model": "gvp",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.029544057324528694
+        ],
+        "test_acc": [
+            0.03144765645265579
+        ],
+        "train_time": [
+            340.3581292629242
+        ],
+        "mean": 0.03144765645265579,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_out": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.1039544939994812
+        ],
+        "test_acc": [
+            0.11390092968940735
+        ],
+        "train_time": [
+            5516.979732990265
+        ],
+        "mean": 0.11390092968940735,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_out": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.02808436006307602
+        ],
+        "test_acc": [
+            0.02917340025305748
+        ],
+        "train_time": [
+            5882.004102468491
+        ],
+        "mean": 0.02917340025305748,
+        "std": 0.0
+    },
+    {
+        "model": "dimenet",
+        "dataset": "paired_star",
+        "pool": "mean",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.04290771484375
+        ],
+        "test_acc": [
+            0.036674123257398605
+        ],
+        "train_time": [
+            296.3000421524048
+        ],
+        "mean": 0.036674123257398605,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.14692994952201843
+        ],
+        "test_acc": [
+            0.17502953112125397
+        ],
+        "train_time": [
+            149.8526873588562
+        ],
+        "mean": 0.17502953112125397,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.4761393666267395
+        ],
+        "test_acc": [
+            0.4892723262310028
+        ],
+        "train_time": [
+            152.94883060455322
+        ],
+        "mean": 0.4892723262310028,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.1975051611661911
+        ],
+        "test_acc": [
+            0.19861675798892975
+        ],
+        "train_time": [
+            149.35771322250366
+        ],
+        "mean": 0.19861675798892975,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.0798436850309372
+        ],
+        "test_acc": [
+            0.07810743898153305
+        ],
+        "train_time": [
+            151.02918195724487
+        ],
+        "mean": 0.07810743898153305,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.34634628891944885
+        ],
+        "test_acc": [
+            0.35494497418403625
+        ],
+        "train_time": [
+            147.26377201080322
+        ],
+        "mean": 0.35494497418403625,
+        "std": 0.0
+    },
+    {
+        "model": "tfn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.10726518929004669
+        ],
+        "test_acc": [
+            0.11384055018424988
+        ],
+        "train_time": [
+            5505.441552877426
+        ],
+        "mean": 0.11384055018424988,
+        "std": 0.0
+    },
+    {
+        "model": "mace",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.02681354433298111
+        ],
+        "test_acc": [
+            0.030031055212020874
+        ],
+        "train_time": [
+            5870.075520515442
+        ],
+        "mean": 0.030031055212020874,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.8094983696937561
+        ],
+        "test_acc": [
+            0.831157386302948
+        ],
+        "train_time": [
+            147.42406177520752
+        ],
+        "mean": 0.831157386302948,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.7745800018310547
+        ],
+        "test_acc": [
+            0.8207784295082092
+        ],
+        "train_time": [
+            147.5389814376831
+        ],
+        "mean": 0.8207784295082092,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.032227255403995514
+        ],
+        "test_acc": [
+            0.026299122720956802
+        ],
+        "train_time": [
+            150.6373884677887
+        ],
+        "mean": 0.026299122720956802,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.09857825934886932
+        ],
+        "test_acc": [
+            0.08081416040658951
+        ],
+        "train_time": [
+            149.45245742797852
+        ],
+        "mean": 0.08081416040658951,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": null,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.08540616929531097
+        ],
+        "test_acc": [
+            0.09560573846101761
+        ],
+        "train_time": [
+            158.15500688552856
+        ],
+        "mean": 0.09560573846101761,
+        "std": 0.0
+    },
+    {
+        "model": "dimenet",
+        "dataset": "paired_star",
+        "pool": "mean",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.0211336649954319
+        ],
+        "test_acc": [
+            0.019494999200105667
+        ],
+        "train_time": [
+            302.3902897834778
+        ],
+        "mean": 0.019494999200105667,
+        "std": 0.0
+    },
+    {
+        "model": "dimenet",
+        "dataset": "paired_star",
+        "pool": "mean",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.026466185227036476
+        ],
+        "test_acc": [
+            0.028034275397658348
+        ],
+        "train_time": [
+            293.6065173149109
+        ],
+        "mean": 0.028034275397658348,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.7070518732070923
+        ],
+        "test_acc": [
+            0.6869490742683411
+        ],
+        "train_time": [
+            150.98147654533386
+        ],
+        "mean": 0.6869490742683411,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.5367178916931152
+        ],
+        "test_acc": [
+            0.6093677878379822
+        ],
+        "train_time": [
+            146.56165099143982
+        ],
+        "mean": 0.6093677878379822,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.5031844973564148
+        ],
+        "test_acc": [
+            0.5587195158004761
+        ],
+        "train_time": [
+            145.574059009552
+        ],
+        "mean": 0.5587195158004761,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.4788444936275482
+        ],
+        "test_acc": [
+            0.5445957183837891
+        ],
+        "train_time": [
+            156.5386004447937
+        ],
+        "mean": 0.5445957183837891,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.3549070656299591
+        ],
+        "test_acc": [
+            0.40186944603919983
+        ],
+        "train_time": [
+            149.34456586837769
+        ],
+        "mean": 0.40186944603919983,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.5067901611328125
+        ],
+        "test_acc": [
+            0.531451404094696
+        ],
+        "train_time": [
+            155.46785593032837
+        ],
+        "mean": 0.531451404094696,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.5031278729438782
+        ],
+        "test_acc": [
+            0.47989386320114136
+        ],
+        "train_time": [
+            146.37689638137817
+        ],
+        "mean": 0.47989386320114136,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.4965355396270752
+        ],
+        "test_acc": [
+            0.4936677813529968
+        ],
+        "train_time": [
+            147.08613109588623
+        ],
+        "mean": 0.4936677813529968,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.7758840322494507
+        ],
+        "test_acc": [
+            0.8261416554450989
+        ],
+        "train_time": [
+            147.9794580936432
+        ],
+        "mean": 0.8261416554450989,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.6811462640762329
+        ],
+        "test_acc": [
+            0.6441602110862732
+        ],
+        "train_time": [
+            153.03906440734863
+        ],
+        "mean": 0.6441602110862732,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.12081517279148102
+        ],
+        "test_acc": [
+            0.13837440311908722
+        ],
+        "train_time": [
+            148.9587106704712
+        ],
+        "mean": 0.13837440311908722,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.09255212545394897
+        ],
+        "test_acc": [
+            0.09178139269351959
+        ],
+        "train_time": [
+            144.79384231567383
+        ],
+        "mean": 0.09178139269351959,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.4744988977909088
+        ],
+        "test_acc": [
+            0.4901004731655121
+        ],
+        "train_time": [
+            148.04490971565247
+        ],
+        "mean": 0.4901004731655121,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.03157958760857582
+        ],
+        "test_acc": [
+            0.026846811175346375
+        ],
+        "train_time": [
+            147.85511875152588
+        ],
+        "mean": 0.026846811175346375,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.7080585956573486
+        ],
+        "test_acc": [
+            0.7288533449172974
+        ],
+        "train_time": [
+            152.89824986457825
+        ],
+        "mean": 0.7288533449172974,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.16675636172294617
+        ],
+        "test_acc": [
+            0.18198251724243164
+        ],
+        "train_time": [
+            153.1596760749817
+        ],
+        "mean": 0.18198251724243164,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.01484167855232954
+        ],
+        "test_acc": [
+            0.014256587252020836
+        ],
+        "train_time": [
+            148.4900758266449
+        ],
+        "mean": 0.014256587252020836,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.05423201248049736
+        ],
+        "test_acc": [
+            0.05599183961749077
+        ],
+        "train_time": [
+            157.74052810668945
+        ],
+        "mean": 0.05599183961749077,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.044866882264614105
+        ],
+        "test_acc": [
+            0.04646455496549606
+        ],
+        "train_time": [
+            149.75549840927124
+        ],
+        "mean": 0.04646455496549606,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": true,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.01657833345234394
+        ],
+        "test_acc": [
+            0.015447800047695637
+        ],
+        "train_time": [
+            148.78562879562378
+        ],
+        "mean": 0.015447800047695637,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "complete_full",
+        "pool": "none",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": null,
+        "n_nodes": [
+            8,
+            9,
+            10
+        ],
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.31802842020988464
+        ],
+        "test_acc": [
+            0.3249265253543854
+        ],
+        "train_time": [
+            146.3631670475006
+        ],
+        "mean": 0.3249265253543854,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.41215142607688904
+        ],
+        "test_acc": [
+            0.47970011830329895
+        ],
+        "train_time": [
+            147.76335453987122
+        ],
+        "mean": 0.47970011830329895,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.973203718662262
+        ],
+        "test_acc": [
+            1.0024129152297974
+        ],
+        "train_time": [
+            149.7842719554901
+        ],
+        "mean": 1.0024129152297974,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.47278881072998047
+        ],
+        "test_acc": [
+            0.5310434103012085
+        ],
+        "train_time": [
+            146.6636095046997
+        ],
+        "mean": 0.5310434103012085,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.6669574975967407
+        ],
+        "test_acc": [
+            0.7452495694160461
+        ],
+        "train_time": [
+            147.42023921012878
+        ],
+        "mean": 0.7452495694160461,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.3333738148212433
+        ],
+        "test_acc": [
+            0.38418853282928467
+        ],
+        "train_time": [
+            151.01776146888733
+        ],
+        "mean": 0.38418853282928467,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.2706415355205536
+        ],
+        "test_acc": [
+            0.2784038186073303
+        ],
+        "train_time": [
+            148.51441264152527
+        ],
+        "mean": 0.2784038186073303,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 2,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.46404755115509033
+        ],
+        "test_acc": [
+            0.538604199886322
+        ],
+        "train_time": [
+            159.4653627872467
+        ],
+        "mean": 0.538604199886322,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.4749504029750824
+        ],
+        "test_acc": [
+            0.4874962568283081
+        ],
+        "train_time": [
+            143.57530736923218
+        ],
+        "mean": 0.4874962568283081,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.6822105646133423
+        ],
+        "test_acc": [
+            0.641838788986206
+        ],
+        "train_time": [
+            154.16908025741577
+        ],
+        "mean": 0.641838788986206,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star2",
+        "pool": "first_and_last",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": true,
+        "best_val_acc": [
+            0.4450955092906952
+        ],
+        "test_acc": [
+            0.4696909189224243
+        ],
+        "train_time": [
+            145.49252676963806
+        ],
+        "mean": 0.4696909189224243,
+        "std": 0.0
+    },
+    {
+        "model": "egnn",
+        "dataset": "paired_star",
+        "pool": "first",
+        "max_corr": 3,
+        "max_ell": 3,
+        "dim": 3,
+        "n_epochs": 1000,
+        "n_layers": 4,
+        "n_data": 1500,
+        "lr": 0.0005,
+        "fold": [
+            6,
+            7,
+            8
+        ],
+        "n_nodes": null,
+        "n_pairs": 2,
+        "single_center": false,
+        "cosine": true,
+        "equivariant": false,
+        "loss_mask": false,
+        "best_val_acc": [
+            0.6793531179428101
+        ],
+        "test_acc": [
+            0.6419745087623596
+        ],
+        "train_time": [
+            146.40503668785095
+        ],
+        "mean": 0.6419745087623596,
+        "std": 0.0
     }
 ]

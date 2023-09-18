@@ -5,6 +5,7 @@ from torch_geometric.nn import global_add_pool, global_mean_pool
 from models.mace_modules.blocks import RadialEmbeddingBlock
 import models.layers.gvp_layer as gvp
 
+from models.utils import first_node_pooling, first_and_last_node_pooling
 
 class GVPGNNModel(torch.nn.Module):
     """
@@ -87,7 +88,9 @@ class GVPGNNModel(torch.nn.Module):
         )
         
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, \
+                    "first": first_node_pooling, "first_and_last": first_and_last_node_pooling, \
+                    "none": lambda x,y: x}[pool]
 
         if self.equivariant_pred:
             # Linear predictor for equivariant tasks using geometric features
@@ -118,10 +121,10 @@ class GVPGNNModel(torch.nn.Module):
         for layer in self.layers:
             h_V = layer(h_V, batch.edge_index, h_E)
 
-        out = self.pool(gvp._merge(*h_V), batch.batch)  # (n, d) -> (batch_size, d)
+        out = self.pool(gvp._merge(*h_V), batch.batch)  # (n, d) -> (batch_size, d); if pool==first_and_last then (2*batch_size, d); if pool=none then (n, d)
         
         if not self.equivariant_pred:
             # Select only scalars for invariant prediction
             out = out[:,:self.s_dim]
         
-        return self.pred(out)  # (batch_size, out_dim)
+        return self.pred(out)  # (batch_size, out_dim); if pool==first_and_last then (2*batch_size, out_dim); if pool=none then (n, d)

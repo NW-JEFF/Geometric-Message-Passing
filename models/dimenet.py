@@ -4,7 +4,8 @@ import torch
 from torch.nn import functional as F
 from torch_geometric.nn import DimeNetPlusPlus
 from torch_scatter import scatter
-
+from torch_geometric.nn.models.dimenet import triplets
+from models.utils import first_node_pooling, first_and_last_node_pooling
 
 class DimeNetPPModel(DimeNetPlusPlus):
     """
@@ -29,7 +30,8 @@ class DimeNetPPModel(DimeNetPlusPlus):
         num_before_skip: int = 1, 
         num_after_skip: int = 2, 
         num_output_layers: int = 3, 
-        act: Union[str, Callable] = 'swish'
+        act: Union[str, Callable] = 'swish',
+        pool: str = "sum",
     ):
         """
         Initializes an instance of the DimeNetPPModel class with the provided parameters.
@@ -51,6 +53,7 @@ class DimeNetPPModel(DimeNetPlusPlus):
         - num_after_skip (int): Number of layers after the skip connections (default: 2)
         - num_output_layers (int): Number of output layers (default: 3)
         - act (Union[str, Callable]): Activation function (default: 'swish' or callable)
+        - pool (str): Global pooling method to be used (default: "sum")
 
         Note:
         - The `act` parameter can be either a string representing a built-in activation function,
@@ -74,9 +77,12 @@ class DimeNetPPModel(DimeNetPlusPlus):
             act
         )
 
+        # special poolings include pool=first, first_and_last, none; all other choices will result in pool=sum
+        self.pool = pool
+
     def forward(self, batch):
         
-        i, j, idx_i, idx_j, idx_k, idx_kj, idx_ji = self.triplets(
+        i, j, idx_i, idx_j, idx_k, idx_kj, idx_ji = triplets(
             batch.edge_index, num_nodes=batch.atoms.size(0))
 
         # Calculate distances.
@@ -93,13 +99,24 @@ class DimeNetPPModel(DimeNetPlusPlus):
         sbf = self.sbf(dist, angle, idx_kj)
 
         # Embedding block.
-        x = self.emb(batch.atoms, rbf, i, j)
-        P = self.output_blocks[0](x, rbf, i, num_nodes=batch.pos.size(0))
+        x = self.emb(batch.atoms, rbf, i, j)  # (2 * number of edges, hidden_channels)
+        # output_blocks first reduce the first dimension from (2 * number of edges) to (number of nodes), and then
+        # end with a linear layer transforming the second dimension from out_emb_channels to out_dim
+        P = self.output_blocks[0](x, rbf, i, num_nodes=batch.pos.size(0))  # (number of nodes, out_dim)
 
         # Interaction blocks.
         for interaction_block, output_block in zip(self.interaction_blocks,
                                                    self.output_blocks[1:]):
             x = interaction_block(x, rbf, sbf, idx_kj, idx_ji)
             P += output_block(x, rbf, i)
-
-        return P.sum(dim=0) if batch is None else scatter(P, batch.batch, dim=0)
+        
+        # global pooling
+        if self.pool == "first":
+            out = P[0] if batch is None else first_node_pooling(P, batch.batch)
+        elif self.pool == "first_and_last":
+            out = P[[0,-1]] if batch is None else first_and_last_node_pooling(P, batch.batch)
+        elif self.pool == "none":
+            out = P
+        else:  # default is sum
+            out = P.sum(dim=0) if batch is None else scatter(P, batch.batch, dim=0)
+        return out

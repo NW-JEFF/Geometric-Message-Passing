@@ -12,6 +12,7 @@ from models.mace_modules.blocks import (
 )
 from models.layers.tfn_layer import TensorProductConvLayer
 
+from models.utils import first_node_pooling, first_and_last_node_pooling
 
 class MACEModel(torch.nn.Module):
     """
@@ -149,7 +150,9 @@ class MACEModel(torch.nn.Module):
             )
 
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, \
+                    "first": first_node_pooling, "first_and_last": first_and_last_node_pooling, \
+                    "none": lambda x,y: x}[pool]
 
         if self.equivariant_pred:
             # Linear predictor for equivariant tasks using geometric features
@@ -181,10 +184,10 @@ class MACEModel(torch.nn.Module):
             sc = F.pad(h, (0, h_update.shape[-1] - h.shape[-1]))
             h = prod(reshape(h_update), sc, None)
 
-        out = self.pool(h, batch.batch)  # (n, d) -> (batch_size, d)
+        out = self.pool(h, batch.batch)  # (n, d) -> (batch_size, d); if pool==first_and_last then (2*batch_size, d); if pool=none then (n, d)
         
         if not self.equivariant_pred:
             # Select only scalars for invariant prediction
             out = out[:,:self.emb_dim]
         
-        return self.pred(out)  # (batch_size, out_dim)
+        return self.pred(out)  # (batch_size, out_dim); if pool==first_and_last then (2*batch_size, out_dim); if pool=none then (n, d)

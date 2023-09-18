@@ -1,9 +1,9 @@
 import torch
 from torch.nn import functional as F
 from torch_geometric.nn import global_add_pool, global_mean_pool
+from models.utils import first_node_pooling, first_and_last_node_pooling
 
 from models.layers.egnn_layer import EGNNLayer
-
 
 class EGNNModel(torch.nn.Module):
     """
@@ -50,7 +50,9 @@ class EGNNModel(torch.nn.Module):
             self.convs.append(EGNNLayer(emb_dim, activation, norm, aggr))
 
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, \
+                    "first": first_node_pooling, "first_and_last": first_and_last_node_pooling, \
+                    "none": lambda x,y: x}[pool]
 
         if self.equivariant_pred:
             # Linear predictor for equivariant tasks using geometric features
@@ -64,8 +66,7 @@ class EGNNModel(torch.nn.Module):
             )
 
     def forward(self, batch):
-        
-        h = self.emb_in(batch.atoms)  # (n,) -> (n, d)
+        h = self.emb_in(batch.atoms)  # (n,) -> (n, d), where n = |node| * batchsize
         pos = batch.pos  # (n, 3)
 
         for conv in self.convs:
@@ -77,11 +78,11 @@ class EGNNModel(torch.nn.Module):
 
             # Update node coordinates (no residual) (n, 3) -> (n, 3)
             pos = pos_update
-    
+
         if not self.equivariant_pred:
             # Select only scalars for invariant prediction
-            out = self.pool(h, batch.batch)  # (n, d) -> (batch_size, d)
+            out = self.pool(h, batch.batch)  # (n, d) -> (batch_size, d); if pool==first_and_last then (2*batch_size, d); if pool=none then (n, d)
         else:
             out = self.pool(torch.cat([h, pos], dim=-1), batch.batch)
             
-        return self.pred(out)  # (batch_size, out_dim)
+        return self.pred(out)  # (batch_size, out_dim); if pool==first_and_last then (2*batch_size, out_dim); if pool=none then (n, d)

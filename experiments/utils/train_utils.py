@@ -134,7 +134,7 @@ def train_reg(model, train_loader, optimizer, device):
         y_pred = model(batch).view(-1)
         loss = F.l1_loss(y_pred, batch.y, reduction='sum')
         loss.backward()
-        loss_all += loss.item() * batch.num_graphs
+        loss_all += loss.item()
         optimizer.step()
     return loss_all / len(train_loader.dataset)
 
@@ -151,7 +151,7 @@ def eval_reg(model, loader, device):
 
 
 
-def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu', cosine=False, lr=1e-4, loss_mask=False):
+def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=100, verbose=True, device='cpu', cosine=False, lr=5e-4, loss_mask=False):
     total_param = 0
     for param in model.parameters():
         total_param += np.prod(list(param.data.size()))
@@ -161,9 +161,9 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
     
     if cosine:
         T_max = n_epochs
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max, eta_min=1e-6)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max, eta_min=5e-6)
     else:
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.9, patience=15, min_lr=0.0001)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.9, patience=15, min_lr=1e-5)
 
     if verbose:
         print(f"Running experiment for {type(model).__name__}.")
@@ -197,8 +197,8 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
             best_val_mae = val_mae
 
         if epoch % 10 == 0 and verbose:
-            print(f'Epoch: {epoch:03d}, LR: {lr:.5f}, Loss: {loss:.5f}, '
-                  f'Val MAE: {val_mae:.5f}, Test MAE: {test_mae:.5f}')
+            print(f'Epoch: {epoch:03d}, LR: {lr:.6f}, Loss: {loss:.4f}, '
+                  f'Val MAE: {val_mae:.6f}, Test MAE: {test_mae:.6f}')
         
         perf_per_epoch.append((test_mae, val_mae, epoch, type(model).__name__))
 
@@ -212,13 +212,13 @@ def _run_experiment_reg(model, train_loader, val_loader, test_loader, n_epochs=1
     t = time.time() - t
     train_time = t
     if verbose:
-        print(f"\nDone! Training took {train_time:.2f}s. Best validation MAE: {best_val_mae:.3f}, corresponding test MAE: {test_mae:.3f}.")
+        print(f"\nDone! Training took {train_time:.2f}s. Best validation MAE: {best_val_mae:.6f}, corresponding test MAE: {test_mae:.6f}.")
     
     return best_val_mae, test_mae, train_time, perf_per_epoch
 
 
 
-def run_experiment_reg(model_func, model_args, train_loader, val_loader, test_loader, n_epochs=100, n_times=100, verbose=False, device='cpu', cosine=False, lr=1e-4, loss_mask=False):
+def run_experiment_reg(model_func, model_args, train_loader, val_loader, test_loader, n_epochs=100, n_times=10, verbose=False, device='cpu', cosine=False, lr=5e-4, loss_mask=False):
     
     best_val_mae_list = []
     test_mae_list = []
@@ -235,8 +235,8 @@ def run_experiment_reg(model_func, model_args, train_loader, val_loader, test_lo
     
     print(f'\nDone! Averaged over {n_times} runs: \n '
           f'- Training time: {np.mean(train_time_list):.2f}s ± {np.std(train_time_list):.2f}. \n '
-          f'- Best validation MAE: {np.mean(best_val_mae_list):.5f} ± {np.std(best_val_mae_list):.5f}. \n'
-          f'- Test MAE: {np.mean(test_mae_list):.5f} ± {np.std(test_mae_list):.5f}. \n')
+          f'- Best validation MAE: {np.mean(best_val_mae_list):.6f} ± {np.std(best_val_mae_list):.6f}. \n'
+          f'- Test MAE: {np.mean(test_mae_list):.6f} ± {np.std(test_mae_list):.6f}. \n')
     
     return best_val_mae_list, test_mae_list, train_time_list, np.mean(test_mae_list), np.std(test_mae_list)
 

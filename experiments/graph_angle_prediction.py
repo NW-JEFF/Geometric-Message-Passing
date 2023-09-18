@@ -20,7 +20,8 @@ import argparse
 from experiments.utils.train_utils import run_experiment_reg
 from models import SchNetModel, DimeNetPPModel, SphereNetModel, EGNNModel, GVPGNNModel, TFNModel, MACEModel
 from experiments.utils.create_graphs import create_star_graphs, create_paired_star_graphs, \
-                                            create_paired_star_graphs_with_two_centers, create_paired_complete_graphs
+                                            create_paired_star_graphs_with_two_centers, create_paired_complete_graphs, \
+                                            create_paired_complete_graphs_with_full_centers
 
 
 
@@ -37,13 +38,15 @@ parser.add_argument("--dataset", type=str, required=True, help="which type of da
 parser.add_argument("--pool", type=str, default="mean", help="type of pooling layers")
 parser.add_argument("--max_corr", type=int, required=False, default=3, help="max correlation")
 parser.add_argument("--max_ell", type=int, required=False, default=3, help="max ell")
+parser.add_argument("--dim", type=int, required=False, default=3, help="dimension of angles")
 parser.add_argument("--n_epochs", type=int, required=False, default=600, help="epochs to train")
 parser.add_argument("--n_layers", type=int, required=False, default=2, help="number of layers to train")
 parser.add_argument("--n_data", type=int, required=False, default=1000, help="number of datapoints to be generated")
-parser.add_argument("--lr", type=float, required=False, default=1e-4, help="learning rate")
+parser.add_argument("--lr", type=float, required=False, default=1e-4, help="the initial learning rate")
 parser.add_argument("--fold", type=int, nargs='+', help="list of numbers of spokes that could occur in star graph datasets")
 parser.add_argument("--n_nodes", type=int, nargs='+', help="list of numbers of nodes that could occur in complete graph datasets")
 parser.add_argument("--n_pairs", type=int, help="number of pairs of nodes to be considered when computing target angles")
+parser.add_argument("--single_center", action="store_true", help="only use a single center when the model is paired_star2")
 parser.add_argument("--cosine", action="store_true", help="enable cosine learning rate decay")
 parser.add_argument("--equivariant", action="store_true", help="equivariant prediction or not")
 parser.add_argument("--loss_mask", action="store_true", help="only compute loss with respect to part of the predictions")
@@ -57,40 +60,10 @@ print("e3nn version {}".format(e3nn.__version__))
 
 
 
-# Generate graph dataset
-dataset_dict = {
-    "star": create_star_graphs,
-    "paired_star": create_paired_star_graphs,
-    "paired_star2": create_paired_star_graphs_with_two_centers,
-    "complete": create_paired_complete_graphs
-}
-
-assert(args.dataset in dataset_dict.keys())
-dataset_func = dataset_dict[args.dataset]
-
-if args.dataset == "star":
-    dataset = dataset_func(num=args.n_data, fold=args.fold, dim=3, target="max")
-    model_args = {'num_layers' : args.n_layers, 'in_dim' : 1, 'out_dim' : 1}
-
-elif args.dataset == "paired_star":
-    dataset = dataset_func(num=args.n_data, fold=args.fold, dim=3, n_pairs=args.n_pairs)
-    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
-
-elif args.dataset == "paired_star2":
-    dataset = dataset_func(num=args.n_data, fold=args.fold, dim=3, n_pairs=args.n_pairs)
-    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
-
-elif args.dataset == "complete":
-    dataset = dataset_func(num=args.n_data, n_nodes=args.n_nodes, dim=3, n_pairs=args.n_pairs)
-    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
-
-
-
-
 # Model setup
 model_dict = {
-    "schnet": SchNetModel,       #TODO: needs to support node level regression
-    "dimenet": DimeNetPPModel,   #TODO: needs to support node level regression
+    "schnet": partial(SchNetModel, pool=args.pool),
+    "dimenet": partial(DimeNetPPModel, pool=args.pool),
     "spherenet": SphereNetModel, #TODO: needs to support node level regression
     "egnn": partial(EGNNModel, equivariant_pred=args.equivariant, pool=args.pool),
     "gvp": partial(GVPGNNModel, equivariant_pred=args.equivariant, pool=args.pool),
@@ -100,6 +73,58 @@ model_dict = {
 
 assert(args.model in model_dict.keys())
 model_func = model_dict[args.model]
+
+
+
+
+# Generate graph dataset
+dataset_dict = {
+    "star": create_star_graphs,
+    "paired_star": create_paired_star_graphs,
+    "paired_star2": create_paired_star_graphs_with_two_centers,
+    "paired_complete": create_paired_complete_graphs,
+    "complete_full": create_paired_complete_graphs_with_full_centers
+}
+
+assert(args.dataset in dataset_dict.keys())
+dataset_func = dataset_dict[args.dataset]
+
+# in_dim: number of distinct atom types of the generated dataset.
+# out_dim: output dimension of the model; need to choose the pooling layer properly to match the dimension of true labels in train_utils.train_reg;
+
+if args.dataset == "star":
+    assert args.fold is not None
+    dataset = dataset_func(num=args.n_data, fold=args.fold, dim=args.dim, target="max")
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : 1, 'out_dim' : 1}
+
+elif args.dataset == "paired_star":
+    assert args.n_pairs is not None
+    assert args.fold is not None
+    dataset = dataset_func(num=args.n_data, fold=args.fold, dim=args.dim, n_pairs=args.n_pairs)
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
+
+elif args.dataset == "paired_star2":
+    # if pool is not first_and_last, then out_dim should be args.n_pairs * 2 to match dimension of true labels, 
+    # but that is not sensible because true labels come from two nodes in each graph and each node feature has dim=n_pairs,
+    # so we should adhere to pool = first_and_last in this case; if single_center==True, then should use pool = first
+    assert args.pool == "first_and_last" or args.pool == "first"
+    assert args.n_pairs is not None
+    assert args.fold is not None
+    dataset = dataset_func(num=args.n_data, fold=args.fold, dim=args.dim, n_pairs=args.n_pairs, single_center=args.single_center)
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
+
+elif args.dataset == "paired_complete":
+    assert args.n_pairs is not None
+    assert args.n_nodes is not None
+    dataset = dataset_func(num=args.n_data, n_nodes=args.n_nodes, dim=args.dim, n_pairs=args.n_pairs)
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
+
+elif args.dataset == "complete_full":
+    assert args.pool == "none"
+    assert args.n_pairs is not None
+    assert args.n_nodes is not None
+    dataset = dataset_func(num=args.n_data, n_nodes=args.n_nodes, dim=args.dim, n_pairs=args.n_pairs)
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
 
 
 
@@ -128,8 +153,11 @@ test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 # Regression task
 loss_mask = False
-if args.dataset == "paired_star2" and args.loss_mask:
-    loss_mask = True
+if args.loss_mask:
+    if args.dataset == "paired_star2":
+        loss_mask = True
+    else:
+        print(f"loss mask is not supported for dataset: {args.dataset}.")
 
 best_val_acc, test_acc, train_time, mean, std = run_experiment_reg(
     model_func,
