@@ -6,6 +6,8 @@ from torch_scatter import scatter
 
 from models.layers.spherenet_layer import *
 
+from models.utils import first_node_pooling, first_and_last_node_pooling
+
 
 class SphereNetModel(torch.nn.Module):
     """
@@ -31,7 +33,8 @@ class SphereNetModel(torch.nn.Module):
         num_output_layers: int = 2,
         act: Callable = swish, 
         output_init: str = 'GlorotOrthogonal', 
-        use_node_features: bool = True
+        use_node_features: bool = True,
+        pool: str = "sum",
     ):
         """
         Initializes an instance of the SphereNetModel class with the following parameters:
@@ -76,6 +79,9 @@ class SphereNetModel(torch.nn.Module):
 
         self.reset_parameters()
 
+        # special poolings include pool=first, first_and_last, none; all other choices will result in pool=sum
+        self.pool = pool
+
     def reset_parameters(self):
         self.init_e.reset_parameters()
         self.init_v.reset_parameters()
@@ -106,5 +112,14 @@ class SphereNetModel(torch.nn.Module):
             # Disable virutal node trick
             # u = update_u(u, v, batch)
         
-        out = scatter(v, batch, dim=0, reduce='add')
+        # global pooling (TODO: in some cases, e.g. star graph with two centers, MAE will get massive; something might go wrong during gradient updates)
+        if self.pool == "first":
+            out = first_node_pooling(v, batch)
+        elif self.pool == "first_and_last":
+            out = first_and_last_node_pooling(v, batch)
+        elif self.pool == "none":
+            out = v
+        else:  # default is sum
+            out = scatter(v, batch, dim=0, reduce='add')
+
         return out

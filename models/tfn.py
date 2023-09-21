@@ -121,9 +121,9 @@ class TFNModel(torch.nn.Module):
             self.convs.append(conv)
 
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, \
-                    "first": first_node_pooling, "first_and_last": first_and_last_node_pooling, \
-                    "none": lambda x,y: x}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool,
+                     "first": first_node_pooling, "first_and_last": first_and_last_node_pooling,
+                     "none": lambda x,y: x}[pool]
 
         if self.equivariant_pred:
             # Linear predictor for equivariant tasks using geometric features

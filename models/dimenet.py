@@ -101,16 +101,16 @@ class DimeNetPPModel(DimeNetPlusPlus):
         # Embedding block.
         x = self.emb(batch.atoms, rbf, i, j)  # (2 * number of edges, hidden_channels)
         # output_blocks first reduce the first dimension from (2 * number of edges) to (number of nodes), and then
-        # end with a linear layer transforming the second dimension from out_emb_channels to out_dim
+        # end up with a linear layer transforming the second dimension from (out_emb_channels) to (out_dim)
         P = self.output_blocks[0](x, rbf, i, num_nodes=batch.pos.size(0))  # (number of nodes, out_dim)
 
         # Interaction blocks.
         for interaction_block, output_block in zip(self.interaction_blocks,
                                                    self.output_blocks[1:]):
             x = interaction_block(x, rbf, sbf, idx_kj, idx_ji)
-            P += output_block(x, rbf, i)
+            P += output_block(x, rbf, i, num_nodes=batch.pos.size(0))
         
-        # global pooling
+        # global pooling (TODO: in some cases, e.g. star graph with two centers, MAE will get massive; something might go wrong during gradient updates)
         if self.pool == "first":
             out = P[0] if batch is None else first_node_pooling(P, batch.batch)
         elif self.pool == "first_and_last":

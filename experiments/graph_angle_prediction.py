@@ -19,9 +19,10 @@ import argparse
 
 from experiments.utils.train_utils import run_experiment_reg
 from models import SchNetModel, DimeNetPPModel, SphereNetModel, EGNNModel, GVPGNNModel, TFNModel, MACEModel
+from models.vtvnn import VTVNNModel
 from experiments.utils.create_graphs import create_star_graphs, create_paired_star_graphs, \
                                             create_paired_star_graphs_with_two_centers, create_paired_complete_graphs, \
-                                            create_paired_complete_graphs_with_full_centers
+                                            create_paired_complete_graphs_with_full_centers, create_paired_radius_graphs_with_full_centers
 
 
 
@@ -31,8 +32,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
 
 # Parse args
-parser = argparse.ArgumentParser(description="A simple script to demonstrate argparse usage.")
-    
+parser = argparse.ArgumentParser(description="Start testing geometric bottleneck in graph networks!")
+# general parameters
 parser.add_argument("--model", type=str, required=True, help="which model to test")
 parser.add_argument("--dataset", type=str, required=True, help="which type of dataset to use")
 parser.add_argument("--pool", type=str, default="mean", help="type of pooling layers")
@@ -43,13 +44,21 @@ parser.add_argument("--n_epochs", type=int, required=False, default=600, help="e
 parser.add_argument("--n_layers", type=int, required=False, default=2, help="number of layers to train")
 parser.add_argument("--n_data", type=int, required=False, default=1000, help="number of datapoints to be generated")
 parser.add_argument("--lr", type=float, required=False, default=1e-4, help="the initial learning rate")
-parser.add_argument("--fold", type=int, nargs='+', help="list of numbers of spokes that could occur in star graph datasets")
-parser.add_argument("--n_nodes", type=int, nargs='+', help="list of numbers of nodes that could occur in complete graph datasets")
-parser.add_argument("--n_pairs", type=int, help="number of pairs of nodes to be considered when computing target angles")
-parser.add_argument("--single_center", action="store_true", help="only use a single center when the model is paired_star2")
 parser.add_argument("--cosine", action="store_true", help="enable cosine learning rate decay")
 parser.add_argument("--equivariant", action="store_true", help="equivariant prediction or not")
+# needed for star graphs
+parser.add_argument("--fold", type=int, nargs='+', help="list of numbers of spokes that could occur in star graph datasets")
+# needed for complete and radius graphs
+parser.add_argument("--n_nodes", type=int, nargs='+', help="list of numbers of nodes that could occur in complete graph datasets")
+# needed for graphs whose regression targets are angles of specified pairs
+parser.add_argument("--n_pairs", type=int, help="number of pairs of nodes to be considered when computing target angles")
+# relavant for star graphs with two centers
+parser.add_argument("--single_center", action="store_true", help="only use a single center when the model is paired_star2")
 parser.add_argument("--loss_mask", action="store_true", help="only compute loss with respect to part of the predictions")
+# relavant for radius graphs
+parser.add_argument("--connection", type=str, default="min", help="the level of connection to establish when constructing radius graphs")
+# relavant for VTVNN
+parser.add_argument("--dense", type=bool, default="True", help="whether or not use dense layers in VTVNN") 
 
 args = parser.parse_args()
 
@@ -64,11 +73,12 @@ print("e3nn version {}".format(e3nn.__version__))
 model_dict = {
     "schnet": partial(SchNetModel, pool=args.pool),
     "dimenet": partial(DimeNetPPModel, pool=args.pool),
-    "spherenet": SphereNetModel, #TODO: needs to support node level regression
+    "spherenet": partial(SphereNetModel, pool=args.pool),
     "egnn": partial(EGNNModel, equivariant_pred=args.equivariant, pool=args.pool),
     "gvp": partial(GVPGNNModel, equivariant_pred=args.equivariant, pool=args.pool),
     "tfn": partial(TFNModel, max_ell=args.max_ell, equivariant_pred=args.equivariant, pool=args.pool),
     "mace": partial(MACEModel, max_ell=args.max_ell, correlation=args.max_corr, equivariant_pred=args.equivariant, pool=args.pool),
+    "vtvnn": partial(VTVNNModel, dense=args.dense, pool=args.pool)
 }
 
 assert(args.model in model_dict.keys())
@@ -83,7 +93,8 @@ dataset_dict = {
     "paired_star": create_paired_star_graphs,
     "paired_star2": create_paired_star_graphs_with_two_centers,
     "paired_complete": create_paired_complete_graphs,
-    "complete_full": create_paired_complete_graphs_with_full_centers
+    "complete_full": create_paired_complete_graphs_with_full_centers,
+    "radius_full": create_paired_radius_graphs_with_full_centers
 }
 
 assert(args.dataset in dataset_dict.keys())
@@ -124,7 +135,14 @@ elif args.dataset == "complete_full":
     assert args.n_pairs is not None
     assert args.n_nodes is not None
     dataset = dataset_func(num=args.n_data, n_nodes=args.n_nodes, dim=args.dim, n_pairs=args.n_pairs)
-    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 2, 'out_dim' : args.n_pairs}
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 1, 'out_dim' : args.n_pairs}
+
+elif args.dataset == "radius_full":
+    assert args.pool == "none"
+    assert args.n_pairs is not None
+    assert args.n_nodes is not None
+    dataset = dataset_func(num=args.n_data, n_nodes=args.n_nodes, dim=args.dim, connection=args.connection, n_pairs=args.n_pairs)
+    model_args = {'num_layers' : args.n_layers, 'in_dim' : args.n_pairs + 1, 'out_dim' : args.n_pairs}
 
 
 

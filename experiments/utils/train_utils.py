@@ -252,7 +252,7 @@ def train_reg_on_first_center(model, train_loader, optimizer, device):
         y_pred = model(batch).view(-1)
         loss = F.l1_loss(y_pred.view(-1, 2)[::2], batch.y.view(-1, 2)[::2], reduction='sum')
         loss.backward()
-        loss_all += loss.item() * batch.num_graphs
+        loss_all += loss.item()
         optimizer.step()
     return loss_all / len(train_loader.dataset)
 

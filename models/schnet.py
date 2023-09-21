@@ -56,9 +56,9 @@ class SchNetModel(SchNet):
         )
 
         # Global pooling/readout function
-        self.pool = {"mean": global_mean_pool, "sum": global_add_pool, \
-                    "first": first_node_pooling, "first_and_last": first_and_last_node_pooling, \
-                    "none": lambda x,y: x}[pool]
+        self.pool = {"mean": global_mean_pool, "sum": global_add_pool,
+                     "first": first_node_pooling, "first_and_last": first_and_last_node_pooling,
+                     "none": lambda x,y: x}[pool]
         
         # Overwrite atom embedding and final predictor
         self.lin2 = torch.nn.Linear(hidden_channels // 2, out_dim)
